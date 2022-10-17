@@ -3,8 +3,29 @@ import os
 from pathlib import Path
 
 from . import constants as Const
-from .config_var import ConfigVar
 from .exceptions import PyenvException
+
+def singleton(class_):
+	instances = {}
+
+	def getinstance(*args, **kwargs):
+		if class_ not in instances:
+			instances[class_] = class_(*args, **kwargs)
+		return instances[class_]
+
+	return getinstance
+
+
+class Singleton(type):
+	_instances = {}
+
+	def __call__(cls, *args, **kwargs):
+		if cls not in cls._instances:
+			cls._instances[cls] = super(Singleton, cls).__call__(*args, **kwargs)
+		return cls._instances[cls]
+
+
+
 
 
 def __get_environment_file(config_path: str, file_name: str, config_type: str):
@@ -30,7 +51,7 @@ def __load_configuration_file(config_file: str, config_type: str):
 		return load_dotenv(config_file, verbose=True)
 
 
-def load(env_path: str = '', file_name: str = '', file_type: str = Const.DOT_ENV_FILE):
+def load_config(env_path: str = '', file_name: str = '', file_type: str = Const.DOT_ENV_FILE):
 	try:
 		config_file = __get_environment_file(config_path=env_path, file_name=file_name, config_type=file_type)
 		load_config = __load_configuration_file(config_file=config_file, config_type=file_type)
@@ -41,19 +62,3 @@ def load(env_path: str = '', file_name: str = '', file_type: str = Const.DOT_ENV
 	except Exception as e:
 		logging.error(e)
 		exit()
-
-
-def is_loaded() -> bool:
-	return os.environ.get(Const.PYENV_LOAD_STATUS_KEY) is not None
-
-
-def get(key: str = '', default=None) -> ConfigVar:
-	return ConfigVar(key=key, value=os.environ.get(key, default=default))
-
-
-def environment() -> str:
-	return get(Const.ENVIRONMENT_VARIABLE_NAME, default=None)
-
-
-def debug():
-	return get(Const.DEBUG_VARIABLE_NAME).as_bool(default=Const.DEBUG_VARIABLE_VALUE)

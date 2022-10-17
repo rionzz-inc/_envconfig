@@ -1,13 +1,5 @@
-from . import _config
+from .envutil import Config, EnvConst
 
 __all__ = [
-	"_config"
+	"Config", "EnvConst"
 ]
-
-_config.load_config
-
-
-
-
-
-
