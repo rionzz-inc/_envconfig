@@ -1,7 +1,7 @@
 import unittest
 from pathlib import Path
 
-from src._pyconfig import load_config, constants as Const, Config
+from src._config import load_config, constants as Const, Config
 
 
 class PyenvTest(unittest.TestCase):

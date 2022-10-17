@@ -24,4 +24,4 @@ class PyenvException():
 		_message = "Configuration File Does Not Exists."
 
 	class ConfigurationLoadingFailed(BaseExceptions):
-		_message = "Failed To Load Configuration From Config File."
+		_message = "Failed To Load Configuration From _config File."

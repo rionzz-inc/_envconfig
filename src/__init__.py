@@ -1,5 +1,13 @@
-import _pyconfig
+from . import _config
 
 __all__ = [
-	"_configutil"
+	"_config"
 ]
+
+_config.load_config
+
+
+
+
+
+

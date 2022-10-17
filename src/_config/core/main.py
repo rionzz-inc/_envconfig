@@ -3,6 +3,7 @@ import os
 from pathlib import Path
 
 from . import constants as Const
+from .config_var import ConfigVar
 from .exceptions import PyenvException
 
 
@@ -13,7 +14,6 @@ def __get_environment_file(config_path: str, file_name: str, config_type: str):
 	config_file_list = list(Path(config_path).glob(f"*{config_type}"))
 	local_config_file = Path(config_path).joinpath(f"{Const.LOCAL_CONFIG_FILE_PREFIX}{config_type}")
 	main_config_file = Path(config_path).joinpath(f"{file_name}{config_type}")
-	
 
 	if local_config_file in config_file_list or main_config_file in config_file_list:
 		if local_config_file in config_file_list:
@@ -30,7 +30,7 @@ def __load_configuration_file(config_file: str, config_type: str):
 		return load_dotenv(config_file, verbose=True)
 
 
-def load_config(env_path: str = '', file_name: str = '', file_type: str = Const.DOT_ENV_FILE):
+def load(env_path: str = '', file_name: str = '', file_type: str = Const.DOT_ENV_FILE):
 	try:
 		config_file = __get_environment_file(config_path=env_path, file_name=file_name, config_type=file_type)
 		load_config = __load_configuration_file(config_file=config_file, config_type=file_type)
@@ -41,3 +41,19 @@ def load_config(env_path: str = '', file_name: str = '', file_type: str = Const.
 	except Exception as e:
 		logging.error(e)
 		exit()
+
+
+def is_loaded() -> bool:
+	return os.environ.get(Const.PYENV_LOAD_STATUS_KEY) is not None
+
+
+def get(key: str = '', default=None) -> ConfigVar:
+	return ConfigVar(key=key, value=os.environ.get(key, default=default))
+
+
+def environment() -> str:
+	return get(Const.ENVIRONMENT_VARIABLE_NAME, default=None)
+
+
+def debug():
+	return get(Const.DEBUG_VARIABLE_NAME).as_bool(default=Const.DEBUG_VARIABLE_VALUE)

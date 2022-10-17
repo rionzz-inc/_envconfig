@@ -6,14 +6,14 @@ with open('README.md') as readme_file:
 
 setup(
 	name='pyutilbox',
-	version='0.1',
+	version='0.3',
 	license='MIT',
 	author='Prakash Leon Mishra',
 	author_email='dev.leonmishra@gmail.com',
 	description='A simple Package to load & parse configuration to diffrent datatypes',
 	long_description=long_desc,
 	long_description_content_type="text/markdown",
-	keywords='Python _pyconfig loader, django configuration loader, flask config loader',
+	keywords='Python _config loader, django configuration loader, flask config loader',
 	package_dir={"": "src"},
 	packages=find_packages(where="src"),
 	python_requires=">=3.0",
