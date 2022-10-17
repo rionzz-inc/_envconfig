@@ -5,8 +5,8 @@ with open('README.md') as readme_file:
 	long_desc = readme_file.read()
 
 setup(
-	name='py_tools',
-	version='0.5',
+	name='pyrutils',
+	version='0.6',
 	license='MIT',
 	author='Prakash Leon Mishra',
 	author_email='dev.leonmishra@gmail.com',
@@ -17,7 +17,7 @@ setup(
 	package_dir={"": "src"},
 	packages=find_packages(where="src"),
 	python_requires=">=3.0",
-	url='https://github.com/rionzz-inc/py_tools',
+	url='https://github.com/rionzz-inc/pyrutils',
 	# download_url='https://github.com/user/reponame/archive/v_01.tar.gz',  # I explain this
 	# later on
 
@@ -31,3 +31,6 @@ setup(
 	]
 
 )
+
+if __name__ == "__main__":
+	print (find_packages(where="src"))
