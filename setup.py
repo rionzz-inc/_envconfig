@@ -5,19 +5,19 @@ with open('README.md') as readme_file:
 	long_desc = readme_file.read()
 
 setup(
-	name='pyrutils',
-	version='0.6',
+	name='pyutilbox',
+	version='0.1',
 	license='MIT',
 	author='Prakash Leon Mishra',
 	author_email='dev.leonmishra@gmail.com',
 	description='A simple Package to load & parse configuration to diffrent datatypes',
 	long_description=long_desc,
 	long_description_content_type="text/markdown",
-	keywords='Python environ loader, django configuration loader, flask config loader',
+	keywords='Python _pyconfig loader, django configuration loader, flask config loader',
 	package_dir={"": "src"},
 	packages=find_packages(where="src"),
 	python_requires=">=3.0",
-	url='https://github.com/rionzz-inc/pyrutils',
+	url='https://github.com/rionzz-inc/pyutilbox',
 	# download_url='https://github.com/user/reponame/archive/v_01.tar.gz',  # I explain this
 	# later on
 

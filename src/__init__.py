@@ -1,5 +1,5 @@
-import environ
+import _pyconfig
 
 __all__ = [
-	"environ"
+	"_configutil"
 ]
