@@ -1,14 +1,14 @@
 import unittest
 from pathlib import Path
 
-from src.envutil import Config,EnvConst
+from src.envutil import Config, EnvConst
 
 
-class PyenvTest(unittest.TestCase):
+class EnvUtilTest(unittest.TestCase):
 	BASE_DIR = Path(__file__).parent.parent.resolve().joinpath('test_data').__str__()
 
 	def setUp(self) -> None:
-		Config.load(env_path=self.BASE_DIR, file_type=EnvConst.DOT_ENV_FILE)
+		Config.load(env_path=self.BASE_DIR, main_file='.env', local_file='.env.local')
 
 	def test_load_env(self):
 		self.assertTrue(Config.is_loaded())
