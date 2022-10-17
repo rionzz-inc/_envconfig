@@ -6,7 +6,7 @@ with open('README.md') as readme_file:
 
 setup(
 	name='pyutilbox',
-	version='0.6',
+	version='0.7',
 	license='MIT',
 	author='Prakash Leon Mishra',
 	author_email='dev.leonmishra@gmail.com',

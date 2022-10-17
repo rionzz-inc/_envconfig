@@ -29,28 +29,24 @@ class Singleton(type):
 def __get_config_file_type(config_file):
 	return os.path.basename(config_file)
 
+
 def __get_environment_file(config_path: str, main_file: str, local_file: str):
-
-	config_type = __get_config_file_type(main_file)
-
 	if not os.path.isdir(config_path):
 		raise PyenvException.BaseDirDoesNotExists(config_path)
 
-	config_file_list = list(Path(config_path).glob(f"*{config_type}"))
 	local_config_file = Path(config_path).joinpath(local_file)
 	main_config_file = Path(config_path).joinpath(main_file)
 
-	if local_config_file in config_file_list or main_config_file in config_file_list:
-		if local_config_file in config_file_list:
-			return local_config_file.__str__()
-		else:
-			return main_config_file.__str__()
+	if local_config_file.exists():
+		return local_config_file.__str__()
+	elif main_config_file.exists():
+		return main_config_file.__str__()
 	else:
-		raise PyenvException.ConfigFileDoesNotExist(config_path)
+		raise PyenvException.ConfigFileDoesNotExist(local_config_file, main_config_file)
 
 
 def __load_configuration_file(config_file: str):
-	if __get_config_file_type(config_file) == Const.DOT_ENV_FILE:
+	if Const.DOT_ENV_FILE in config_file:
 		from dotenv import load_dotenv
 		return load_dotenv(config_file, verbose=True)
 
