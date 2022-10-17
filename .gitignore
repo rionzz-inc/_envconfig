@@ -131,4 +131,4 @@ dmypy.json
 .idea
 
 
-sample_data/*
+test_data/*
